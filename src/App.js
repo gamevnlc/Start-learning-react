@@ -1,5 +1,4 @@
 import React from 'react'
-import { SSL_OP_PKCS1_CHECK_1 } from 'constants';
 
 class App extends React.Component {
   render() {
