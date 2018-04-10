@@ -20,10 +20,9 @@ class App extends React.Component {
       <div>
         <h1>{txt}</h1>
         <Widget update={this.update.bind(this)}/>
-        <br />
-        <Button>I <Heart text="123"></Heart> React</Button>
         <h2>{this.state.txt}</h2>
-        <b>Bold</b>
+        <Button>I <Heart text="123"></Heart> React</Button>
+        <Event></Event>
       </div>
     )
   }
@@ -37,7 +36,7 @@ App.propTypes = {
 
 // Default prop
 App.defaultProps = {
-  txt: 'HIhi'
+  txt: 'Default prop value'
 }
 
 // const App = () => <h1>Hello Stateless</h1>
@@ -65,6 +64,39 @@ Heart.propTypes = {
     if(props[propName].length < 1) {
       return new Error(`${propName} was too short`)
     }
+  }
+}
+
+class Event extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      currentEvent: '---'
+    }
+    this.update = this.update.bind(this)
+  }
+  update(e) {
+    this.setState({currentEvent: e.type})
+  }
+  render() {
+    return (
+      <div>
+        <textarea
+          onClick={this.update}
+          onCopy={this.update}
+          onCut={this.update}
+          onPaste={this.update}
+          onKeyDown={this.update}
+          onKeyPress={this.update}
+          onKeyUp={this.update}
+          onFocus={this.update}
+          onBlur={this.update}
+          cols="30"
+          rows="10">
+        </textarea>
+        <h1>{this.state.currentEvent}</h1>
+      </div>
+    )
   }
 }
 export default App
