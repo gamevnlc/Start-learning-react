@@ -19,7 +19,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>{txt}</h1>
-        <input type="text" onChange={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
         <h2>{this.state.txt}</h2>
         <b>Bold</b>
       </div>
@@ -40,5 +42,8 @@ App.defaultProps = {
 }
 
 // const App = () => <h1>Hello Stateless</h1>
+
+const Widget = (props) =>
+  <input type="text" onChange={props.update}/>
 
 export default App
