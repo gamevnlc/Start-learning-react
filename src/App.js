@@ -20,8 +20,8 @@ class App extends React.Component {
       <div>
         <h1>{txt}</h1>
         <Widget update={this.update.bind(this)}/>
-        <Widget update={this.update.bind(this)}/>
-        <Widget update={this.update.bind(this)}/>
+        <br />
+        <Button>I <Heart></Heart> React</Button>
         <h2>{this.state.txt}</h2>
         <b>Bold</b>
       </div>
@@ -36,14 +36,24 @@ App.propTypes = {
 }
 
 // Default prop
-
 App.defaultProps = {
   txt: 'HIhi'
 }
 
 // const App = () => <h1>Hello Stateless</h1>
 
+// React Components as children
 const Widget = (props) =>
   <input type="text" onChange={props.update}/>
 
+// Access nested data with Reacts props.children
+const Button = (props) =>
+  <button>{props.children}</button>
+
+// Access nested data with Reacts props.children
+class Heart extends React.Component {
+  render() {
+    return <span>&hearts;</span>
+  }
+}
 export default App
