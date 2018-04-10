@@ -21,7 +21,7 @@ class App extends React.Component {
         <h1>{txt}</h1>
         <Widget update={this.update.bind(this)}/>
         <br />
-        <Button>I <Heart></Heart> React</Button>
+        <Button>I <Heart text="123"></Heart> React</Button>
         <h2>{this.state.txt}</h2>
         <b>Bold</b>
       </div>
@@ -54,6 +54,17 @@ const Button = (props) =>
 class Heart extends React.Component {
   render() {
     return <span>&hearts;</span>
+  }
+}
+
+Heart.propTypes = {
+  text(props, propName, component) {
+    if (!(propName in props)) {
+      return new Error(`Missing prop ${propName}`)
+    }
+    if(props[propName].length < 1) {
+      return new Error(`${propName} was too short`)
+    }
   }
 }
 export default App
