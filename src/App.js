@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,14 @@ class App extends React.Component {
     this.setState({txt: e.target.value})
   }
 
+  change() {
+    this.setState({
+      a: this.a.value,
+      b: this.refs.b.value,
+      c: ReactDOM.findDOMNode(this.c).value
+    })
+  }
+
   render() {
     // return <h1>Hello World</h1>
     let txt = this.props.txt
@@ -23,8 +32,21 @@ class App extends React.Component {
         <h2>{this.state.txt}</h2>
         <Button>I <Heart text="123"></Heart> React</Button>
         <Event></Event>
+        <div>
+          <input ref={ node => this.a = node} type="text" onChange={this.change.bind(this)} /> {this.state.a}
+          <hr/>
+          <input ref="b" type="text" onChange={this.change.bind(this)} /> {this.state.b}
+          <hr/>
+          <Input ref={component => this.c = component} change={this.change.bind(this)} /> {this.state.c}
+        </div>
       </div>
     )
+  }
+}
+
+class Input extends React.Component {
+  render() {
+    return <input type="text" onChange={this.props.change} />
   }
 }
 
