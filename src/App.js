@@ -10,6 +10,15 @@ class App extends React.Component {
     }
   }
 
+  componentWillMount() {
+    console.log('componentWillMount')
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+
+  }
+
   update(e) {
     this.setState({txt: e.target.value})
   }
@@ -25,6 +34,7 @@ class App extends React.Component {
   render() {
     // return <h1>Hello World</h1>
     let txt = this.props.txt
+    console.log('render')
     return (
       <div>
         <h1>{txt}</h1>
@@ -42,6 +52,27 @@ class App extends React.Component {
       </div>
     )
   }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+  }
+}
+
+class Wrapper extends React.Component {
+  mount() {
+    ReactDOM.render(<App></App>, document.getElementById('root'))
+  }
+  unmount() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.mount.bind(this)}>Mount</button>
+        <button onClick={this.unmount.bind(this)}>UnMount</button>
+      </div>
+    )
+  }
 }
 
 class Input extends React.Component {
@@ -53,7 +84,7 @@ class Input extends React.Component {
 // Define prop
 App.propTypes = {
   txt: PropTypes.string,
-  cat: PropTypes.string.isRequired
+  cat: PropTypes.string
 }
 
 // Default prop
