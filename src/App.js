@@ -60,10 +60,10 @@ class App extends React.Component {
 
 class Wrapper extends React.Component {
   mount() {
-    ReactDOM.render(<App></App>, document.getElementById('root'))
+    ReactDOM.render(<App></App>, document.getElementById('a'))
   }
   unmount() {
-    ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'))
   }
   render() {
     return (
@@ -152,4 +152,4 @@ class Event extends React.Component {
     )
   }
 }
-export default App
+export default Wrapper
