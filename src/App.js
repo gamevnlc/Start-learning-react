@@ -2,42 +2,45 @@ import React from 'react';
 // import PropTypes from 'prop-types'
 // import ReactDOM from 'react-dom';
 
-const HOC = InnerComponent => class extends React.Component {
-  constructor() {
-    super()
-    this.state = {count: 0}
-  }
-  update() {
-    this.setState({count: this.state.count + 1});
-  }
-  render() {
-    return (
-      <InnerComponent {...this.props} {...this.state} update={this.update.bind(this)}/>
-    )
-  }
-}
 
 class App extends React.Component {
-
+  constructor() {
+    super()
+    this.state = {
+      input: '/** Input your jsx here **/',
+      output: '',
+      err: ''
+    }
+  }
+  update(e) {
+    let code = e.target.value;
+    try {
+      this.setState({
+        output: window.Babel
+        .transform(code, {presets: ['es2015', 'react']})
+        .code,
+        err: ''
+      })
+    } catch (error) {
+      this.setState({err: error.message})
+    }
+  }
   render() {
     return (
       <div>
-        <Button>button</Button>
-        <hr/>
-        <Label>label</Label>
+        <header>{this.state.err}</header>
+        <div className="container">
+          <textarea
+            onChange={this.update.bind(this)}
+            defaultValue={this.state.input}
+            cols="50"
+            rows="10"/>
+        </div>
       </div>
     )
   }
 }
 
-const Button = HOC((props) => <button onClick={props.update}>{props.children} - {props.count}</button>)
 
-class Label extends React.Component {
-  render() {
-    return (
-      <label>{this.props.children}</label>
-    )
-  }
-}
 
 export default App;
