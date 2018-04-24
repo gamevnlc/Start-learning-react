@@ -6,7 +6,7 @@ body {
 
 header {
     display: block;
-    height: 5vh;
+    height: 10vh;
     overflow: auto;
     background-color: pink;
     color: red;
